@@ -2,25 +2,29 @@ import sfml as sf
 from config_handler import *
 from warden import *
 
+class Game():
+	def __init__(self):
+		self.warden = Warden()
 
-# def main():
-# 	window = sf.RenderWindow(sf.VideoMode(800, 600), "Test Window")
-# 	window.framerate_limit = 60
+	def setup(self):
+		self.warden.initialize("game")
 
-# 	running = True
+	def run(self):
 
-# 	while running:
-# 		for event in window.iter_events():
-# 			if event.type == sf.Event.CLOSED:
-# 				running = False
+		while self.warden.state != GAMESTATE_QUIT:
+			for event in self.warden.window.iter_events():
+				self.warden.consumeEvent(event)
 
-# 			if sf.Keyboard.is_key_pressed(sf.Keyboard.ESCAPE):
-# 				running = False
+			if self.warden.input.keyDown(sf.Keyboard.ESCAPE):
+				self.warden.state = GAMESTATE_QUIT
 
-# 		window.clear(sf.Color.BLACK)
-# 		window.display()
+			self.warden.window.clear(sf.Color(255, 0, 255))
+			self.warden.window.display()
 
-# 	window.close()
+	def cleanup(self):
+		pass
 
-# if __name__ == '__main__':
-# 	main()
+if __name__ == '__main__':
+	game = Game()
+	game.setup()
+	game.run()

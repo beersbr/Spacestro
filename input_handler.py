@@ -8,13 +8,13 @@ class Input():
 		self.keys_pressed = defaultdict(bool)
 
 	def consumeEvent(self, event):
-		self._cleanup_lists()
+		self._cleanupLists()
 
 		if event.type == sf.Event.KEY_PRESSED:
 			self._keyDown(event)
 			return True
 
-		if event.typ9e == sf.Event.KEY_RELEASED:
+		if event.type == sf.Event.KEY_RELEASED:
 			self._keyUp(event)
 			return True
 
@@ -34,5 +34,5 @@ class Input():
 		self.keys_pressed[event.code] = True
 
 	# this might be a heavy operation. if it becomes a problem then it will be looked at
-	def _cleanupEvents(self):
+	def _cleanupLists(self):
 		self.keys_pressed = defaultdict(bool)
